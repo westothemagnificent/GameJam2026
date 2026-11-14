@@ -19,13 +19,13 @@ config/icon="res://icon.svg"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
-[physics]
-
-3d/physics_engine="Jolt Physics"
-
 [editor]
 
 import/use_multiple_threads=false
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
 
 [rendering]
 

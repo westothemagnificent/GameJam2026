@@ -8,6 +8,9 @@ height = 32.0
 
 [node name="player" type="CharacterBody2D" unique_id=1021853709]
 script = ExtResource("1_hjaqi")
+jump_velocity = 350.0
+movement_speed = 350.0
+slow_movement_speed = 64.0
 
 [node name="sprite" type="Sprite2D" parent="." unique_id=1650614916]
 scale = Vector2(0.159, 0.25)

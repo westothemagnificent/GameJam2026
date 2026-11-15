@@ -1,6 +1,7 @@
 extends Area2D
 
 @export var rotation_speed : float = 80.0;
+@export var deletes : bool = true
 @onready var sprite : Sprite2D = $"sprite"
 
 var target_material : ShaderMaterial
@@ -25,4 +26,4 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	player.flip = !player.flip
 	
-	queue_free()
+	if (deletes): queue_free()

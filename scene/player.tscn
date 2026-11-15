@@ -103,8 +103,36 @@ _data = {
 &"run": SubResource("Animation_fvtld")
 }
 
+[sub_resource type="Gradient" id="Gradient_n5opj"]
+offsets = PackedFloat32Array(0, 0.09950249)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hjaqi"]
+gradient = SubResource("Gradient_n5opj")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Curve" id="Curve_hjaqi"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.16666666, 1), 0.0, 0.0, 0, 0, Vector2(0.5572916, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_hjaqi"]
+curve = SubResource("Curve_hjaqi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4indn"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 21.0
+initial_velocity_max = 30.0
+scale_curve = SubResource("CurveTexture_hjaqi")
+turbulence_noise_strength = 0.1
+
 [node name="player" type="CharacterBody2D" unique_id=1021853709 groups=["player"]]
 script = ExtResource("1_hjaqi")
+jump_velocity = null
+movement_speed = null
+slow_movement_speed = null
+acceleration = null
 
 [node name="sprite" type="Sprite2D" parent="." unique_id=1340778235]
 texture = SubResource("AtlasTexture_4indn")
@@ -115,3 +143,13 @@ shape = SubResource("CapsuleShape2D_4indn")
 [node name="anim" type="AnimationPlayer" parent="." unique_id=479550713]
 libraries/ = SubResource("AnimationLibrary_ct4mp")
 autoplay = &"run"
+
+[node name="jump" type="GPUParticles2D" parent="." unique_id=1859774441]
+position = Vector2(0, 12)
+emitting = false
+amount = 20
+texture = SubResource("GradientTexture2D_hjaqi")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_4indn")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sbb0ewsnnl1i"
-path="res://.godot/imported/cave_set_atlas.png-5b3b3e720f4faa8f046dd5b4eb61a905.ctex"
+uid="uid://cixxcn5cnvbt7"
+path="res://.godot/imported/TileAtlasv1.3.png-4a90d05b54171b27479e39d5ab795524.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/cave_set_atlas.png"
-dest_files=["res://.godot/imported/cave_set_atlas.png-5b3b3e720f4faa8f046dd5b4eb61a905.ctex"]
+source_file="res://assets/TileAtlasv1.3.png"
+dest_files=["res://.godot/imported/TileAtlasv1.3.png-4a90d05b54171b27479e39d5ab795524.ctex"]
 
 [params]
 

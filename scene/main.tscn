@@ -1,16 +1,34 @@
 [gd_scene format=3 uid="uid://be0308xxjox3g"]
 
-[ext_resource type="PackedScene" uid="uid://e1tcg7fxngya" path="res://scene/level.scn" id="1_itxqv"]
 [ext_resource type="Script" uid="uid://cr8bn0qsva4uv" path="res://scene/main.gd" id="1_wp4xf"]
+[ext_resource type="Script" uid="uid://rfpo5618gux3" path="res://scripts/cam.gd" id="2_brvut"]
 [ext_resource type="PackedScene" uid="uid://b0yjud0holutd" path="res://scene/player.tscn" id="2_v0l8b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4indn"]
+size = Vector2(197, 707)
 
 [node name="Main" type="Node" unique_id=1805945932]
 script = ExtResource("1_wp4xf")
+levels = Array[String](["res://scene/level.scn", "res://scene/win_level.tscn"])
 
-[node name="level" parent="." unique_id=1879423158 instance=ExtResource("1_itxqv")]
+[node name="cam" type="Camera2D" parent="." unique_id=2048735339]
+position = Vector2(9310, 486)
+zoom = Vector2(2.2, 2.2)
+script = ExtResource("2_brvut")
+speed = 25.0
+look_ahead = 0.03
 
 [node name="player" parent="." unique_id=1021853709 instance=ExtResource("2_v0l8b")]
-position = Vector2(251, 491)
+position = Vector2(209, 330)
 
-[node name="cam" type="Camera2D" parent="player" unique_id=2048735339]
-zoom = Vector2(2.2, 2.2)
+[node name="win" type="Area2D" parent="." unique_id=1036420594]
+metadata/_edit_lock_ = true
+
+[node name="col" type="CollisionShape2D" parent="win" unique_id=1381258136]
+position = Vector2(88.5, 343.5)
+shape = SubResource("RectangleShape2D_4indn")
+
+[node name="spawn" type="Marker2D" parent="." unique_id=51146510]
+position = Vector2(209, 331)
+
+[connection signal="body_entered" from="win" to="." method="_on_win_body_entered"]

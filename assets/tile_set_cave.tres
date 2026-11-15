@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" format=3 uid="uid://py7l1v5eae7b"]
 
-[ext_resource type="Texture2D" uid="uid://fejulit4huqk" path="res://assets/TileAtlasv1.2.png" id="1_6esx0"]
+[ext_resource type="Texture2D" uid="uid://cixxcn5cnvbt7" path="res://assets/TileAtlasv1.3.png" id="1_6esx0"]
 [ext_resource type="Texture2D" uid="uid://b8mxq1wyqq220" path="res://assets/temp_tiles.png" id="2_udxq0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ywpbk"]
@@ -36,8 +36,13 @@ texture = ExtResource("1_6esx0")
 11:0/0 = 0
 12:0/0 = 0
 13:0/0 = 0
-13:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 3.956892, 8, 4.136751, 8, 8, -8, 8)
+13:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.4964685, 6.2950554, 3.2374573, 6.115198, 8, 8, -8, 8)
 13:0/0/custom_data_2 = true
+13:0/0/custom_data_3 = 490.0
+14:0/0 = 0
+14:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.7770338, 6.2950554, 2.877739, 6.2950554, 8, 8, -8, 8)
+14:0/0/custom_data_2 = true
+14:0/0/custom_data_3 = 612.5
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bx65x"]
 texture = ExtResource("2_udxq0")
@@ -60,5 +65,7 @@ custom_data_layer_1/name = "kill"
 custom_data_layer_1/type = 1
 custom_data_layer_2/name = "jumpPad"
 custom_data_layer_2/type = 1
+custom_data_layer_3/name = "strength"
+custom_data_layer_3/type = 3
 sources/21 = SubResource("TileSetAtlasSource_bx65x")
 sources/0 = SubResource("TileSetAtlasSource_ywpbk")

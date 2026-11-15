@@ -15,14 +15,55 @@ var flip : bool
 var jumpTimer : float
 
 var tilemap : TileMapLayer
+var main : Main
+
+var death_playing : bool
+var dead : bool
+var death_time_till_restart : float = 0.7
 
 @onready var anim : AnimationPlayer = $"anim"
 @onready var sprite : Sprite2D = $"sprite"
+@onready var jump_part : GPUParticles2D = $"jump"
+
+var tile_transforms : Dictionary = {
+	[0]: Vector2(0, -1),
+	[TileSetAtlasSource.TRANSFORM_FLIP_H | TileSetAtlasSource.TRANSFORM_TRANSPOSE]: Vector2(1, 0),
+	[TileSetAtlasSource.TRANSFORM_FLIP_V | TileSetAtlasSource.TRANSFORM_FLIP_H]: Vector2(0, 1),
+	[TileSetAtlasSource.TRANSFORM_FLIP_V | TileSetAtlasSource.TRANSFORM_TRANSPOSE]: Vector2(-1, 0)
+}
 
 func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	
+	if (dead):
+		dead = false
+		death_playing = true
+		
+		collision_layer = 0
+		collision_mask = 0
+		velocity.y = -400
+		var sign : float = -1.0 if flip else 1.0
+		velocity.x = -sign * 100
+		anim.play("jump")
+
+	
+	if (death_playing):
+		death_time_till_restart -= delta
+		death_time_till_restart = clampf(death_time_till_restart, 0.0, INF)
+		if (death_time_till_restart <= 0.0):
+			main.load_level()
+			collision_layer = 1 << 0
+			collision_mask = 1 << 0
+			death_playing = false
+			dead = false
+			death_time_till_restart = 0.7
+			return
+		
+		velocity += get_gravity() * delta
+		move_and_slide()
+		return
 	
 	var slowInput : bool = Input.is_action_pressed("slow")
 	var jumpInput : bool = Input.is_action_just_pressed("jump")
@@ -52,6 +93,7 @@ func _physics_process(delta: float) -> void:
 		has_double_jump = false
 		jumpTimer = 0.0
 		anim.play("jump")
+		jump_part.emitting = true
 	
 	if !onFloor:
 		velocity += get_gravity() * delta
@@ -73,10 +115,14 @@ func _physics_process(delta: float) -> void:
 		
 		var data : TileData = tilemap.get_cell_tile_data(tile)
 		
-		if (data == null): continue
+		if (data == null): 
+			push_warning("warn tile has no data")
+			continue
 		
 		var kill : bool = data.get_custom_data("kill") as bool
 		var jumpPad : bool = data.get_custom_data("jumpPad") as bool
 		
-		if (kill): get_tree().reload_current_scene.call_deferred()
-		if (jumpPad): velocity.y = -jump_velocity * 1.4
+		if (kill): dead = true
+		if (jumpPad): 
+			var strength : float = data.get_custom_data("strength") as float
+			velocity.y = -strength

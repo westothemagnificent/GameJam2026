@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" format=3 uid="uid://py7l1v5eae7b"]
 
-[ext_resource type="Texture2D" uid="uid://sbb0ewsnnl1i" path="res://assets/cave_set_atlas.png" id="1_6esx0"]
+[ext_resource type="Texture2D" uid="uid://fejulit4huqk" path="res://assets/TileAtlasv1.2.png" id="1_6esx0"]
 [ext_resource type="Texture2D" uid="uid://b8mxq1wyqq220" path="res://assets/temp_tiles.png" id="2_udxq0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ywpbk"]
@@ -28,6 +28,16 @@ texture = ExtResource("1_6esx0")
 6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -0.17985725, 8, 8, -8, 8)
 7:0/0 = 0
 7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -0.17985725, 8, -8, 8, 8, -8, 8)
+8:0/0 = 0
+8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+9:0/0 = 0
+9:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+13:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 3.956892, 8, 4.136751, 8, 8, -8, 8)
+13:0/0/custom_data_2 = true
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bx65x"]
 texture = ExtResource("2_udxq0")
@@ -48,5 +58,7 @@ custom_data_layer_0/name = "generated"
 custom_data_layer_0/type = 1
 custom_data_layer_1/name = "kill"
 custom_data_layer_1/type = 1
+custom_data_layer_2/name = "jumpPad"
+custom_data_layer_2/type = 1
 sources/21 = SubResource("TileSetAtlasSource_bx65x")
 sources/0 = SubResource("TileSetAtlasSource_ywpbk")

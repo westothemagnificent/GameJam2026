@@ -63,5 +63,7 @@ func _physics_process(delta: float) -> void:
 		
 		var data : TileData = tilemap.get_cell_tile_data(tile)
 		var kill = data.get_custom_data("kill") as bool
+		var jumpPad = data.get_custom_data("jumpPad") as bool
 		
 		if (kill): get_tree().reload_current_scene.call_deferred()
+		if (jumpPad): velocity.y = -jump_velocity * 1.4

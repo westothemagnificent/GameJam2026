@@ -19,11 +19,17 @@ var main : Main
 
 var death_playing : bool
 var dead : bool
-var death_time_till_restart : float = 0.7
+var death_time_till_restart : float = 1.2
 
 @onready var anim : AnimationPlayer = $"anim"
 @onready var sprite : Sprite2D = $"sprite"
-@onready var jump_part : GPUParticles2D = $"jump"
+@onready var jump_part : GPUParticles2D = $"jumpPart"
+
+@onready var death : AudioStreamPlayer2D = $"death"
+@onready var bong : AudioStreamPlayer2D = $"bong"
+@onready var jump : AudioStreamPlayer2D = $"jump"
+
+@onready var run : AudioStreamPlayer2D = $"running"
 
 var tile_transforms : Dictionary = {
 	[0]: Vector2(0, -1),
@@ -47,6 +53,9 @@ func _physics_process(delta: float) -> void:
 		var sign : float = -1.0 if flip else 1.0
 		velocity.x = -sign * 100
 		anim.play("jump")
+		death.play()
+		main.forwards_bg.stop()
+		run.stop()
 
 	
 	if (death_playing):
@@ -58,7 +67,8 @@ func _physics_process(delta: float) -> void:
 			collision_mask = 1 << 0
 			death_playing = false
 			dead = false
-			death_time_till_restart = 0.7
+			death_time_till_restart = 1.2
+			main.forwards_bg.play()
 			return
 		
 		velocity += get_gravity() * delta
@@ -70,6 +80,11 @@ func _physics_process(delta: float) -> void:
 	
 	var onFloor : bool = is_on_floor()
 	var onWall : bool = is_on_wall()
+	
+	if (onFloor && !run.playing):
+		run.play()
+	elif (!onFloor && run.playing):
+		run.stop()
 	
 	jumpTimer -= delta
 	jumpTimer = clampf(jumpTimer, 0.0, INF)
@@ -94,6 +109,7 @@ func _physics_process(delta: float) -> void:
 		jumpTimer = 0.0
 		anim.play("jump")
 		jump_part.emitting = true
+		jump.play()
 	
 	if !onFloor:
 		velocity += get_gravity() * delta
@@ -126,3 +142,4 @@ func _physics_process(delta: float) -> void:
 		if (jumpPad): 
 			var strength : float = data.get_custom_data("strength") as float
 			velocity.y = -strength
+			bong.play()

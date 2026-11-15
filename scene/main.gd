@@ -8,6 +8,8 @@ class_name Main
 @onready var player : Player = $"player"
 @onready var camera : Camera = $"cam"
 
+@onready var forwards_bg : AudioStreamPlayer = $"forwards"
+
 var level_node : Node2D
 
 # Called when the node enters the scene tree for the first time.

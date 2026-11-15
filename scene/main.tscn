@@ -3,13 +3,14 @@
 [ext_resource type="Script" uid="uid://cr8bn0qsva4uv" path="res://scene/main.gd" id="1_wp4xf"]
 [ext_resource type="Script" uid="uid://rfpo5618gux3" path="res://scripts/cam.gd" id="2_brvut"]
 [ext_resource type="PackedScene" uid="uid://b0yjud0holutd" path="res://scene/player.tscn" id="2_v0l8b"]
+[ext_resource type="AudioStream" uid="uid://dm1xvvqsc8wlj" path="res://assets/forward.wav" id="4_brvut"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4indn"]
 size = Vector2(197, 707)
 
 [node name="Main" type="Node" unique_id=1805945932]
 script = ExtResource("1_wp4xf")
-levels = Array[String](["res://scene/level.scn", "res://scene/win_level.tscn"])
+levels = Array[String](["res://scene/level.scn", "res://scene/level2.scn", "res://scene/win_level.tscn"])
 
 [node name="cam" type="Camera2D" parent="." unique_id=2048735339]
 position = Vector2(9310, 486)
@@ -30,5 +31,11 @@ shape = SubResource("RectangleShape2D_4indn")
 
 [node name="spawn" type="Marker2D" parent="." unique_id=51146510]
 position = Vector2(209, 331)
+
+[node name="forwards" type="AudioStreamPlayer" parent="." unique_id=1255574585]
+stream = ExtResource("4_brvut")
+volume_db = 8.0
+pitch_scale = 0.2
+autoplay = true
 
 [connection signal="body_entered" from="win" to="." method="_on_win_body_entered"]

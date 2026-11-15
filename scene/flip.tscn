@@ -1,8 +1,17 @@
 [gd_scene format=3 uid="uid://orlrfs4yvn0e"]
 
 [ext_resource type="Script" uid="uid://idc3ijhaiggq" path="res://scripts/flip.gd" id="1_n5opj"]
+[ext_resource type="Shader" uid="uid://duajm51x5in3r" path="res://scripts/flip.gdshader" id="2_yv60n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o6rwy"]
+shader = ExtResource("2_yv60n")
+shader_parameter/isInRadians = false
+shader_parameter/xRadians = 0.0
+shader_parameter/yRadians = 0.0
+shader_parameter/zRadians = 0.0
+shader_parameter/xDegrees = 0.0
+shader_parameter/yDegrees = 0.0
+shader_parameter/zDegrees = 0.0
 
 [sub_resource type="Gradient" id="Gradient_xykwx"]
 offsets = PackedFloat32Array(0, 0.5074627, 0.6791045)

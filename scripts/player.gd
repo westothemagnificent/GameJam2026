@@ -16,6 +16,9 @@ var jumpTimer : float
 
 var tilemap : TileMapLayer
 
+@onready var anim : AnimationPlayer = $"anim"
+@onready var sprite : Sprite2D = $"sprite"
+
 func _ready() -> void:
 	pass
 
@@ -42,11 +45,13 @@ func _physics_process(delta: float) -> void:
 	if (jumpReady && onFloor):
 		velocity.y = -jump_velocity
 		jumpTimer = 0.0
+		anim.play("jump")
 	
 	if (jumpInput && has_double_jump && !onFloor):
 		velocity.y = -jump_velocity * 0.8
 		has_double_jump = false
 		jumpTimer = 0.0
+		anim.play("jump")
 	
 	if !onFloor:
 		velocity += get_gravity() * delta
@@ -55,6 +60,11 @@ func _physics_process(delta: float) -> void:
 		var sign : float = -1.0 if flip else 1.0
 		velocity.x = sign * lerpf(sign * velocity.x, slow_movement_speed if slowInput else movement_speed, acceleration * delta)
 	
+	if (!anim.is_playing()):
+		anim.play("run")
+	
+	sprite.flip_h = flip
+	
 	move_and_slide()
 	
 	for i in range(get_slide_collision_count()):
@@ -62,8 +72,11 @@ func _physics_process(delta: float) -> void:
 		var tile : Vector2i = tilemap.local_to_map(collision.get_position() - collision.get_normal())
 		
 		var data : TileData = tilemap.get_cell_tile_data(tile)
-		var kill = data.get_custom_data("kill") as bool
-		var jumpPad = data.get_custom_data("jumpPad") as bool
+		
+		if (data == null): continue
+		
+		var kill : bool = data.get_custom_data("kill") as bool
+		var jumpPad : bool = data.get_custom_data("jumpPad") as bool
 		
 		if (kill): get_tree().reload_current_scene.call_deferred()
 		if (jumpPad): velocity.y = -jump_velocity * 1.4

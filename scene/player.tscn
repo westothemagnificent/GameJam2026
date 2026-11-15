@@ -1,17 +1,117 @@
 [gd_scene format=3 uid="uid://b0yjud0holutd"]
 
 [ext_resource type="Script" uid="uid://c5hnndyvlbumt" path="res://scripts/player.gd" id="1_hjaqi"]
-[ext_resource type="Texture2D" uid="uid://iud5lfp5pv3n" path="res://icon.svg" id="1_xo3ru"]
+[ext_resource type="Texture2D" uid="uid://cvnjc6je34y0o" path="res://assets/CharacterAnimationsv2.0.png" id="3_fvtld"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4indn"]
+atlas = ExtResource("3_fvtld")
+region = Rect2(48, 0, 16, 32)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4indn"]
+radius = 8.0
 height = 31.1
+
+[sub_resource type="Animation" id="Animation_hjaqi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("AtlasTexture_4indn")]
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4jxa"]
+atlas = ExtResource("3_fvtld")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oh5ij"]
+atlas = ExtResource("3_fvtld")
+region = Rect2(80, 0, 16, 32)
+
+[sub_resource type="Animation" id="Animation_oh5ij"]
+resource_name = "jump"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [SubResource("AtlasTexture_s4jxa"), SubResource("AtlasTexture_oh5ij")]
+}
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ct4mp"]
+load_path = "res://.godot/imported/CharacterAnimationsv2.0.png-8605120c0bcb3e88b349b8cafe798eab.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hp4bs"]
+atlas = SubResource("CompressedTexture2D_ct4mp")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_g2vtq"]
+load_path = "res://.godot/imported/CharacterAnimationsv2.0.png-8605120c0bcb3e88b349b8cafe798eab.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fvbb"]
+atlas = SubResource("CompressedTexture2D_g2vtq")
+region = Rect2(64, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ct4mp"]
+atlas = ExtResource("3_fvtld")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvtld"]
+atlas = ExtResource("3_fvtld")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hjaqi"]
+load_path = "res://.godot/imported/CharacterAnimationsv2.0.png-8605120c0bcb3e88b349b8cafe798eab.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2vtq"]
+atlas = SubResource("CompressedTexture2D_hjaqi")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="Animation" id="Animation_fvtld"]
+resource_name = "run"
+length = 0.25
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.13333334, 0.16666667, 0.2, 0.23333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [SubResource("AtlasTexture_hp4bs"), SubResource("AtlasTexture_4indn"), SubResource("AtlasTexture_2fvbb"), SubResource("AtlasTexture_ct4mp"), SubResource("AtlasTexture_hp4bs"), SubResource("AtlasTexture_fvtld"), SubResource("AtlasTexture_g2vtq"), SubResource("AtlasTexture_fvtld")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ct4mp"]
+_data = {
+&"RESET": SubResource("Animation_hjaqi"),
+&"jump": SubResource("Animation_oh5ij"),
+&"run": SubResource("Animation_fvtld")
+}
 
 [node name="player" type="CharacterBody2D" unique_id=1021853709 groups=["player"]]
 script = ExtResource("1_hjaqi")
 
-[node name="sprite" type="Sprite2D" parent="." unique_id=1650614916]
-scale = Vector2(0.159, 0.25)
-texture = ExtResource("1_xo3ru")
+[node name="sprite" type="Sprite2D" parent="." unique_id=1340778235]
+texture = SubResource("AtlasTexture_4indn")
 
 [node name="col" type="CollisionShape2D" parent="." unique_id=1141972645]
 shape = SubResource("CapsuleShape2D_4indn")
+
+[node name="anim" type="AnimationPlayer" parent="." unique_id=479550713]
+libraries/ = SubResource("AnimationLibrary_ct4mp")
+autoplay = &"run"

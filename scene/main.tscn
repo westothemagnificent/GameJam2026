@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://be0308xxjox3g"]
 
-[ext_resource type="PackedScene" uid="uid://e1tcg7fxngya" path="res://scene/debug_level.scn" id="1_itxqv"]
+[ext_resource type="PackedScene" uid="uid://e1tcg7fxngya" path="res://scene/level.scn" id="1_itxqv"]
+[ext_resource type="Script" uid="uid://cr8bn0qsva4uv" path="res://scene/main.gd" id="1_wp4xf"]
 [ext_resource type="PackedScene" uid="uid://b0yjud0holutd" path="res://scene/player.tscn" id="2_v0l8b"]
 
 [node name="Main" type="Node" unique_id=1805945932]
+script = ExtResource("1_wp4xf")
 
-[node name="debugLevel" parent="." unique_id=1879423158 instance=ExtResource("1_itxqv")]
+[node name="level" parent="." unique_id=1879423158 instance=ExtResource("1_itxqv")]
 
 [node name="player" parent="." unique_id=1021853709 instance=ExtResource("2_v0l8b")]
 position = Vector2(251, 491)

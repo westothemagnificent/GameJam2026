@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://orlrfs4yvn0e"]
+
+[ext_resource type="Script" uid="uid://idc3ijhaiggq" path="res://scripts/flip.gd" id="1_n5opj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o6rwy"]
+
+[sub_resource type="Gradient" id="Gradient_xykwx"]
+offsets = PackedFloat32Array(0, 0.5074627, 0.6791045)
+colors = PackedColorArray(0.9333334, 0, 1, 1, 0, 1, 0.6999998, 1, 1, 0, 0.7333336, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4indn"]
+gradient = SubResource("Gradient_xykwx")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_n5opj"]
+offsets = PackedFloat32Array(0, 0.09950249)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xykwx"]
+gradient = SubResource("Gradient_n5opj")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Curve" id="Curve_yv60n"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.21093749, 1), 0.0, 0.0, 0, 0, Vector2(0.9088541, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_n5opj"]
+curve = SubResource("Curve_yv60n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4indn"]
+particle_flag_disable_z = true
+angle_min = -179.99998
+angle_max = 180.00002
+spread = 180.0
+initial_velocity_min = 70.0
+initial_velocity_max = 80.0
+angular_velocity_min = -180.00002
+angular_velocity_max = 179.99998
+gravity = Vector3(0, -3, 0)
+scale_curve = SubResource("CurveTexture_n5opj")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4indn"]
+radius = 32.01562
+
+[node name="flip" type="Area2D" unique_id=1605505689]
+script = ExtResource("1_n5opj")
+
+[node name="sprite" type="Sprite2D" parent="." unique_id=1230698315]
+material = SubResource("ShaderMaterial_o6rwy")
+texture = SubResource("GradientTexture2D_4indn")
+
+[node name="flipIcon" type="Label" parent="sprite" unique_id=1269336031]
+anchors_preset = -1
+anchor_left = 0.20300001
+anchor_top = 0.312
+anchor_right = 0.20300001
+anchor_bottom = 0.312
+offset_left = -31.992
+offset_top = -31.968
+offset_right = 8.007999
+offset_bottom = -8.968
+text = "<--"
+horizontal_alignment = 1
+
+[node name="part" type="GPUParticles2D" parent="." unique_id=2090791499]
+z_index = -1
+amount = 40
+texture = SubResource("GradientTexture2D_xykwx")
+process_material = SubResource("ParticleProcessMaterial_4indn")
+
+[node name="col" type="CollisionShape2D" parent="." unique_id=249010063]
+shape = SubResource("CircleShape2D_4indn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
